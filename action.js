@@ -16,11 +16,13 @@ var tasks = [
 
 
 function showTasks() {
-    document.getElementsByClassName('task-area')[0].innerHTML='';
-    for(var i = 0; i < tasks.length; i++){
-        create(tasks[i].text,tasks[i].id, tasks[i].isComplete);
 
-    }
+   document.getElementsByClassName('task-area')[0].innerHTML='';
+    if (tasks.length>0){
+        for(var i = 0; i < tasks.length; i++) {
+        create(tasks[i].text,tasks[i].id, tasks[i].isComplete);}}
+
+     document.getElementsByClassName('task-area')[0].innerHTML+='<div></div>';
 }
 
 
@@ -38,11 +40,11 @@ function create(text, id, isComplete){
     if (isComplete){
         elementText.className += ' complete-true';
         element.innerHTML += `<div class="compelete" onclick="completeTask(${id})">
-        <i class="far fa-check-circle"></i>
+        <input type="checkbox" checked>
         </div>`;
     } else{
         element.innerHTML += `<div class="compelete" onclick="completeTask(${id})">
-   <i class="far fa-circle"></i>
+        <input type="checkbox"  >
    </div>`;
     }
     element.innerHTML += `<div class="compelete" onclick="deleteItem (${id})">
@@ -71,5 +73,14 @@ function completeTask(index){
 
 
 
-showTasks();
 
+
+    function deleteItem(id) {
+ 
+        console.log(id);
+          var removedItems = tasks.splice(id, 1);
+        console.log(tasks);
+        console.log(removedItems);
+        showTasks();
+    }
+showTasks();
